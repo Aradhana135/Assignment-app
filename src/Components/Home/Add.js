@@ -11,7 +11,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Button, Table, Modal, Input, Typography,Form } from "antd";
 import Home from './Home'
 import { useNavigate } from "react-router-dom";
-const Edit = (props) => {
+const Add = (props) => {
     const navigate = useNavigate()
     const [isEditing, setIsEditing] = useState(false);
     const [dataSource, setDataSource] = useState(props.data || {})
@@ -23,14 +23,12 @@ const Edit = (props) => {
   const[address,setAddress]=useState('')
   console.log('www', props.data)
 
-  const onEditStudent = (record) => {
-
-    setEditingStudent({ ...record });
-  };
       const onFinish = (values) => {
-        props.handleAppData(values)
+        props.handleAdd(values)
+        
         console.log('Success:', values);
         setDataSource(values)
+        
         // localStorage.setItem(values.email, JSON.stringify(values))
         navigate('/home')
       };
@@ -38,7 +36,6 @@ const Edit = (props) => {
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
       };
-
   return (
     <Form
       name="basic"
@@ -48,11 +45,7 @@ const Edit = (props) => {
       wrapperCol={{
         span: 16,
       }}
-      initialValues={{
-        name: dataSource.name,
-        email: dataSource.email,
-        address: dataSource.address
-      }}
+      
       
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -68,11 +61,7 @@ const Edit = (props) => {
           },
         ]}
     
-        onChange={(e) => {
-              setDataSource((pre) => {
-                return { ...pre, name: e.target.value };
-              });
-            }}
+        onChange={(e) => setName( e.target.value )}
       >
         <Input />
       </Form.Item>
@@ -86,12 +75,7 @@ const Edit = (props) => {
             message: 'Please input your email!',
           },
         ]}
-        value={editingStudent?.email}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, email: e.target.value };
-              });
-            }}
+        onChange={(e) => setEmail( e.target.value )}
       >
         <Input />
       </Form.Item>
@@ -104,12 +88,7 @@ const Edit = (props) => {
             message: 'Please input your address!',
           },
         ]}
-        value={editingStudent?.address}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, address: e.target.value };
-              });
-            }}
+        onChange={(e) => setAddress( e.target.value )}
       >
         <Input />
       </Form.Item>
@@ -129,4 +108,4 @@ const Edit = (props) => {
   )
 }
 
-export default Edit
+export default Add

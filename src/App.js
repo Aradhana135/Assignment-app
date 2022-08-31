@@ -7,12 +7,56 @@ import Forms from './Components/SignUp/Form';
 import Home from './Components/Home/Home';
 import Demo2 from './Components/Home/Home';
 import Edit from './Components/Home/Edit';
+import Add from './Components/Home/Add';
+const dataArr = [
+  {
+    id: 1,
+    name: "John",
+    email: "john@gmail.com",
+    address: "John Address",
+  },
+  {
+    id: 2,
+    name: "David",
+    email: "david@gmail.com",
+    address: "David Address",
+  },
+  {
+    id: 3,
+    name: "James",
+    email: "james@gmail.com",
+    address: "James Address",
+  },
+  {
+    id: 4,
+    name: "Sam",
+    email: "sam@gmail.com",
+    address: "Sam Address",
+  },
+]
 const App = () => {
+  const [appData, setAppData] = useState(dataArr)
   const [data, setData] = useState({})
   const [isLogin, setIsLogin] = useState(false)
 
   const handleData = (dataSource) => {
     setData(dataSource)
+  }
+
+  const handleAppData = (item) => {
+    console.log('aaa', item)
+    const newData = appData.map(value => (
+      data.id === value.id ? item : value 
+    ))
+    setAppData(newData)
+  }
+
+  const handleAdd = (values) => {
+    const newValue = {
+      ...values,
+      id: appData.length+1
+    }
+    setAppData([...appData, newValue])
   }
 
   return (
@@ -22,8 +66,9 @@ const App = () => {
         <Routes>
          <Route path="/"  element={<Forms/>} />
           <Route path="/login"  element={<Logins/>}/>
-          <Route path='/home' element={<Home handleData={handleData} />}/>
-          <Route path='/edit' element={<Edit data={data} />}/>
+          <Route path='/home' element={<Home handleData={handleData} appData={appData} />}/>
+          <Route path='/edit' element={<Edit data={data} handleAppData={handleAppData} />}/>
+          <Route path='/add' element={<Add data={data} handleAdd={handleAdd} />}/>
            <Route path="*" element={<Page404/>} />
         </Routes>
      </BrowserRouter>

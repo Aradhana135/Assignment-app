@@ -4,6 +4,7 @@ import {
   EditOutlined,
   DeleteOutlined,
   FolderViewOutlined,
+  EyeOutlined
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { UserOutlined } from '@ant-design/icons';
@@ -23,32 +24,7 @@ function Home(props) {
   const[email,setEmail]=useState('')
   const[address,setAddress]=useState('')
 
-  const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      name: "John",
-      email: "john@gmail.com",
-      address: "John Address",
-    },
-    {
-      id: 2,
-      name: "David",
-      email: "david@gmail.com",
-      address: "David Address",
-    },
-    {
-      id: 3,
-      name: "James",
-      email: "james@gmail.com",
-      address: "James Address",
-    },
-    {
-      id: 4,
-      name: "Sam",
-      email: "sam@gmail.com",
-      address: "Sam Address",
-    },
-  ]);
+  const [dataSource, setDataSource] = useState(props.appData);
   const columns = [
     {
       key: "1",
@@ -76,7 +52,7 @@ function Home(props) {
       render: (record) => {
         return (
           <>
-            <FolderViewOutlined
+            <EyeOutlined
               onClick={() =>  
                 showModal(record)
               
@@ -89,8 +65,10 @@ function Home(props) {
               navigate('/edit')
             }}>Edit</Button> */}
             <EditOutlined
-              onClick={() => {
-                onEditStudent(record);
+              onClick={(e) => {
+                e.preventDefault()
+                props.handleData(record)
+                navigate('/edit')
               }}
             />
             <DeleteOutlined
@@ -158,11 +136,31 @@ function Home(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <Button
+        {/* <Button
           onClick={() => setIsAdd(true)}
           style={{ color: "blue", marginBottom: 10, marginTop: 20 }}
         >
           Add a new Student
+        </Button> */}
+
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            // props.handleData(record)
+            navigate('/add')}}
+          style={{ color: "blue", marginBottom: 10, marginTop: 5 }}
+        >
+          Add
+        </Button>
+
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            // props.handleData(record)
+            navigate('/')}}
+          style={{ color: "blue", marginBottom: 10, marginTop: 80,marginLeft:650 }}
+        >
+          Logout
         </Button>
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
