@@ -7,7 +7,6 @@ import {
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { Button, Table, Modal,  Typography } from "antd";
-// import Logins from "../LogIn/Logins";
 function Home(props) {
   const navigate = useNavigate()
   
@@ -111,7 +110,7 @@ function Home(props) {
         <Button
           onClick={(e) => {
             e.preventDefault()
-            // props.handleData(record)
+            
             navigate('/add')}}
           style={{ color: "blue", marginBottom: 10, marginTop: 5 }}
         >
@@ -121,61 +120,14 @@ function Home(props) {
         <Button type='primary'
           onClick={(e) => {
             e.preventDefault()
-            // props.handleData(record)
+           
             navigate('/login')}}
           style={{ color: "blue", marginBottom: 10, marginTop: 80,marginLeft:1150 }}
         >
           Logout
         </Button>
         <Table columns={columns} dataSource={dataSource} ></Table>
-        {/* <Modal
-          title="Edit Student"
-          visible={isEditing}
-          okText="Save"
-          onCancel={() => {
-            resetEditing();
-          }}
-          onOk={() => {
-            setDataSource((pre) => {
-              return pre.map((student) => {
-                if (student.id === editingStudent.id) {
-                  return editingStudent;
-                } else {
-                  return student;
-                }
-              });
-            });
-            resetEditing();
-          }}
-        > */}
-          {/* <Typography.Paragraph >Name
-          <Input
-            value={editingStudent?.name}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, name: e.target.value };
-              });
-            }}
-          /></Typography.Paragraph>
-          <Typography.Paragraph >Email
-          <Input
-            value={editingStudent?.email}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, email: e.target.value };
-              });
-            }}
-          /></Typography.Paragraph>
-          <Typography.Paragraph > Address
-          <Input
-            value={editingStudent?.address}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, address: e.target.value };
-              });
-            }}
-          /></Typography.Paragraph>
-        </Modal> */}
+        
         <Modal
           visible={visible}
           title="View"
@@ -193,18 +145,7 @@ function Home(props) {
         < Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
         < Typography.Paragraph> Address: {viewData.address}</Typography.Paragraph>
         </Modal>
-        {/* <Modal
-          visible={isAdd}
-          title="Add Student"
-          onOk={onAddStudent}
-          onCancel={() => setIsAdd(false)}
-        >
-          <Input size="large" placeholder="ID" prefix={<UserOutlined />} onChange={(e) => setId( e.target.value )}/>
-          <Input size="large" placeholder="Name" prefix={<UserOutlined />} onChange={(e) => setName( e.target.value )}/>
-          <Input size="large" placeholder="Email" prefix={<UserOutlined />} onChange={(e) => setEmail( e.target.value )}/>
-          <Input size="large" placeholder="Address" prefix={<UserOutlined />} onChange={(e) => setAddress( e.target.value )}/>
         
-        </Modal> */}
       </header>
     </div>
   );

@@ -45,8 +45,8 @@ const App = () => {
     const newData = appData.map((value) => (
       data.id === value.id ? {...item, id:data.id} : value 
     ))
-     
-     console.log('id',data.id)
+
+     console.log(data.id)
 
     setAppData(newData,data.id)
   }
