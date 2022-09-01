@@ -1,26 +1,18 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  FolderViewOutlined,
-} from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { UserOutlined } from '@ant-design/icons';
-import { Button, Table, Modal, Input, Typography,Form } from "antd";
-import Home from './Home'
+import { Button,  Input,Form } from "antd";
 import { useNavigate } from "react-router-dom";
 const Add = (props) => {
     const navigate = useNavigate()
-    const [isEditing, setIsEditing] = useState(false);
+    
     const [dataSource, setDataSource] = useState(props.data || {})
-    const [editingStudent, setEditingStudent] = useState(null);
+    
     console.log('data',dataSource)
-    const [isAdd, setIsAdd] = useState(false);
-  const[name,setName]=useState('')
-  const[email,setEmail]=useState('')
-  const[address,setAddress]=useState('')
+   
+  const[,setName]=useState('')
+  const[,setEmail]=useState('')
+  const[,setAddress]=useState('')
   console.log('www', props.data)
 
       const onFinish = (values) => {
@@ -29,7 +21,7 @@ const Add = (props) => {
         console.log('Success:', values);
         setDataSource(values)
         
-        // localStorage.setItem(values.email, JSON.stringify(values))
+        
         navigate('/home')
       };
     
@@ -63,7 +55,7 @@ const Add = (props) => {
     
         onChange={(e) => setName( e.target.value )}
       >
-        <Input />
+        <Input allowClear style={{ width: 400 }} placeholder='Name'/>
       </Form.Item>
 
       <Form.Item
@@ -77,7 +69,7 @@ const Add = (props) => {
         ]}
         onChange={(e) => setEmail( e.target.value )}
       >
-        <Input />
+        <Input Input allowClear style={{ width: 400 }} placeholder='Email'/>
       </Form.Item>
       <Form.Item
         label="Address"
@@ -90,7 +82,7 @@ const Add = (props) => {
         ]}
         onChange={(e) => setAddress( e.target.value )}
       >
-        <Input />
+        <Input Input allowClear style={{ width: 400 }} placeholder='Address'/>
       </Form.Item>
       
 

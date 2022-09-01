@@ -3,14 +3,11 @@ import {
   AutoComplete,
   Button,
   Checkbox,
-  Col,
   Form,
   Input,
   InputNumber,
-  Row,
   Select,Alert
 } from 'antd';
-import Password from 'antd/lib/input/Password';
 import Logins from '../LogIn/Logins';
 import { NavLink } from 'react-router-dom';
 
@@ -110,7 +107,7 @@ const Forms = () => {
   }));
   return (
    
-    <div width='300px' color='orange'>
+    <div width='300px' color='orange' >
         
         {login ? (
     <Form
@@ -223,7 +220,9 @@ const Forms = () => {
           addonBefore={prefixSelector}
           style={{
             width: '100%',
+          
           }}
+          maxLength={10}
         />
       </Form.Item>
 
@@ -307,11 +306,11 @@ const Forms = () => {
             )}
           </Form>
         ) : (
-          // <logins/>
-          <NavLink two='/login'><logins/></NavLink>
+         
+          <NavLink to='/login'><Logins/></NavLink>
         )}  
            
-          {/* </Form> */}
+          
       
        
    

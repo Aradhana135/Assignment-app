@@ -1,32 +1,25 @@
 import { useState } from "react";
-
-import { Link } from "react-router-dom";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  FolderViewOutlined,
-} from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { UserOutlined } from '@ant-design/icons';
-import { Button, Table, Modal, Input, Typography,Form } from "antd";
-import Home from './Home'
+// import { UserOutlined } from '@ant-design/icons';
+import { Button,  Input,Form } from "antd";
+
 import { useNavigate } from "react-router-dom";
 const Edit = (props) => {
     const navigate = useNavigate()
-    const [isEditing, setIsEditing] = useState(false);
+    // const [isEditing, setIsEditing] = useState(false);
     const [dataSource, setDataSource] = useState(props.data || {})
     const [editingStudent, setEditingStudent] = useState(null);
     console.log('data',dataSource)
-    const [isAdd, setIsAdd] = useState(false);
-  const[name,setName]=useState('')
-  const[email,setEmail]=useState('')
-  const[address,setAddress]=useState('')
+//     const [isAdd, setIsAdd] = useState(false);
+//   const[name,setName]=useState('')
+//   const[email,setEmail]=useState('')
+//   const[address,setAddress]=useState('')
   console.log('www', props.data)
 
-  const onEditStudent = (record) => {
+//   const onEditStudent = (record) => {
 
-    setEditingStudent({ ...record });
-  };
+//     setEditingStudent({ ...record });
+//   };
       const onFinish = (values) => {
         props.handleAppData(values)
         console.log('Success:', values);
@@ -74,7 +67,7 @@ const Edit = (props) => {
               });
             }}
       >
-        <Input />
+        <Input allowClear style={{ width: 400 }} placeholder='Name'/>
       </Form.Item>
 
       <Form.Item
@@ -93,7 +86,7 @@ const Edit = (props) => {
               });
             }}
       >
-        <Input />
+        <Input allowClear style={{ width: 400 }} placeholder='Email'/>
       </Form.Item>
       <Form.Item
         label="Address"
@@ -111,7 +104,7 @@ const Edit = (props) => {
               });
             }}
       >
-        <Input />
+        <Input allowClear style={{ width: 400 }} placeholder='Address' />
       </Form.Item>
       
 

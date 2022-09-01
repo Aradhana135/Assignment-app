@@ -1,29 +1,20 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import {
   EditOutlined,
   DeleteOutlined,
-  FolderViewOutlined,
   EyeOutlined
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { UserOutlined } from '@ant-design/icons';
-import { Button, Table, Modal, Input, Typography } from "antd";
-import Logins from "../LogIn/Logins";
+import { Button, Table, Modal,  Typography } from "antd";
+// import Logins from "../LogIn/Logins";
 function Home(props) {
   const navigate = useNavigate()
-  const [isEditing, setIsEditing] = useState(false);
-
-  const [editingStudent, setEditingStudent] = useState(null);
+  
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [viewData, setViewData] = useState({});
-  const [isAdd, setIsAdd] = useState(false);
-  const[id,setId]=useState('')
-  const[name,setName]=useState('')
-  const[email,setEmail]=useState('')
-  const[address,setAddress]=useState('')
-
+  
   const [dataSource, setDataSource] = useState(props.appData);
   const columns = [
     {
@@ -59,11 +50,7 @@ function Home(props) {
         }
               style={{ color: "blue", marginRight: 10 }}
             />
-            {/* <Button onClick={(e) => {
-              e.preventDefault()
-              props.handleData(record)
-              navigate('/edit')
-            }}>Edit</Button> */}
+           
             <EditOutlined
               onClick={(e) => {
                 e.preventDefault()
@@ -83,17 +70,7 @@ function Home(props) {
     },
   ];
 
-  const onAddStudent = () => {
-    const newStudent = {
-      id: id,
-      name: name,
-      email: email,
-      address: address,
-    };
-    setDataSource((pre) => {
-      return [...pre, newStudent];
-    });
-  };
+  
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -107,14 +84,7 @@ function Home(props) {
     });
   };
 
-  const onEditStudent = (record) => {
-    setIsEditing(true);
-    setEditingStudent({ ...record });
-  };
-  const resetEditing = () => {
-    setIsEditing(false);
-    setEditingStudent(null);
-  };
+ 
 
   const showModal = (record) => {
     setVisible(true);
@@ -136,12 +106,7 @@ function Home(props) {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <Button
-          onClick={() => setIsAdd(true)}
-          style={{ color: "blue", marginBottom: 10, marginTop: 20 }}
-        >
-          Add a new Student
-        </Button> */}
+        
 
         <Button
           onClick={(e) => {
@@ -153,17 +118,17 @@ function Home(props) {
           Add
         </Button>
 
-        <Button
+        <Button type='primary'
           onClick={(e) => {
             e.preventDefault()
             // props.handleData(record)
-            navigate('/')}}
-          style={{ color: "blue", marginBottom: 10, marginTop: 80,marginLeft:650 }}
+            navigate('/login')}}
+          style={{ color: "blue", marginBottom: 10, marginTop: 80,marginLeft:1150 }}
         >
           Logout
         </Button>
-        <Table columns={columns} dataSource={dataSource}></Table>
-        <Modal
+        <Table columns={columns} dataSource={dataSource} ></Table>
+        {/* <Modal
           title="Edit Student"
           visible={isEditing}
           okText="Save"
@@ -182,8 +147,8 @@ function Home(props) {
             });
             resetEditing();
           }}
-        >
-          <Typography.Paragraph >Name
+        > */}
+          {/* <Typography.Paragraph >Name
           <Input
             value={editingStudent?.name}
             onChange={(e) => {
@@ -210,11 +175,12 @@ function Home(props) {
               });
             }}
           /></Typography.Paragraph>
-        </Modal>
+        </Modal> */}
         <Modal
           visible={visible}
           title="View"
           onOk={handleOk}
+          loading={loading}
           onCancel={handleCancel}
           footer={[
             <Button key="back" onClick={handleCancel}>
@@ -227,7 +193,7 @@ function Home(props) {
         < Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
         < Typography.Paragraph> Address: {viewData.address}</Typography.Paragraph>
         </Modal>
-        <Modal
+        {/* <Modal
           visible={isAdd}
           title="Add Student"
           onOk={onAddStudent}
@@ -238,7 +204,7 @@ function Home(props) {
           <Input size="large" placeholder="Email" prefix={<UserOutlined />} onChange={(e) => setEmail( e.target.value )}/>
           <Input size="large" placeholder="Address" prefix={<UserOutlined />} onChange={(e) => setAddress( e.target.value )}/>
         
-        </Modal>
+        </Modal> */}
       </header>
     </div>
   );

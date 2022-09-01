@@ -3,9 +3,7 @@ import { BrowserRouter , Routes, Route } from "react-router-dom";
 import Logins from './Components/LogIn/Logins';
 import Page404 from './Components/Page404/Page404';
 import Forms from './Components/SignUp/Form';
-// import Demo from './Components/Home/Demo';
 import Home from './Components/Home/Home';
-import Demo2 from './Components/Home/Home';
 import Edit from './Components/Home/Edit';
 import Add from './Components/Home/Add';
 const dataArr = [
@@ -37,18 +35,20 @@ const dataArr = [
 const App = () => {
   const [appData, setAppData] = useState(dataArr)
   const [data, setData] = useState({})
-  const [isLogin, setIsLogin] = useState(false)
-
+  
   const handleData = (dataSource) => {
     setData(dataSource)
   }
 
   const handleAppData = (item) => {
     console.log('aaa', item)
-    const newData = appData.map(value => (
-      data.id === value.id ? item : value 
+    const newData = appData.map((value) => (
+      data.id === value.id ? {...item, id:data.id} : value 
     ))
-    setAppData(newData)
+     
+     console.log('id',data.id)
+
+    setAppData(newData,data.id)
   }
 
   const handleAdd = (values) => {
