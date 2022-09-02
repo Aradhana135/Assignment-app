@@ -104,16 +104,18 @@ function Home(props) {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div >
+      
         <Button
-          type="primary"
+          type='primary'
+
+    
           onClick={(e) => {
             e.preventDefault();
 
             navigate("/add");
           }}
-          style={{ color: "blue", marginBottom: 10, marginTop: 5 }}
+          style={{  marginBottom: 10, marginTop: 5 }}
           icon={<UserAddOutlined />}
         >
           Add
@@ -128,7 +130,7 @@ function Home(props) {
               navigate("/login");
             }, 1000);
           }}
-          style={{ color: "blue", marginTop: 10, marginLeft: 1250 }}
+          style={{ marginTop: 10, marginLeft: 1250 }}
           icon={<PoweroffOutlined />}
         >
           Logout
@@ -175,7 +177,7 @@ function Home(props) {
             Address: {viewData.address}
           </Typography.Paragraph>
         </Modal>
-      </header>
+     
     </div>
   );
 }
