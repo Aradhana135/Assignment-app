@@ -1,33 +1,32 @@
 import { useState } from "react";
 
 import "antd/dist/antd.css";
-import { Button,  Input,Form } from "antd";
+import { Button, Input, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 const Add = (props) => {
-    const navigate = useNavigate()
-    
-    const [dataSource, setDataSource] = useState(props.data || {})
-    
-    console.log('data',dataSource)
-   
-  const[,setName]=useState('')
-  const[,setEmail]=useState('')
-  const[,setAddress]=useState('')
-  console.log('www', props.data)
+  const navigate = useNavigate();
 
-      const onFinish = (values) => {
-        props.handleAdd(values)
-        
-        console.log('Success:', values);
-        setDataSource(values)
-        
-        
-        navigate('/home')
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+  const [dataSource, setDataSource] = useState(props.data || {});
+
+  console.log("data", dataSource);
+
+  const [, setName] = useState("");
+  const [, setEmail] = useState("");
+  const [, setAddress] = useState("");
+  console.log("www", props.data);
+
+  const onFinish = (values) => {
+    props.handleAdd(values);
+
+    console.log("Success:", values);
+    setDataSource(values);
+
+    navigate("/home");
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
     <Form
       name="basic"
@@ -37,8 +36,6 @@ const Add = (props) => {
       wrapperCol={{
         span: 16,
       }}
-      
-      
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -49,13 +46,12 @@ const Add = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your name!',
+            message: "Please input your name!",
           },
         ]}
-    
-        onChange={(e) => setName( e.target.value )}
+        onChange={(e) => setName(e.target.value)}
       >
-        <Input allowClear style={{ width: 400 }} placeholder='Name'/>
+        <Input allowClear style={{ width: 400 }} placeholder="Name" />
       </Form.Item>
 
       <Form.Item
@@ -64,12 +60,12 @@ const Add = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your email!',
+            message: "Please input your email!",
           },
         ]}
-        onChange={(e) => setEmail( e.target.value )}
+        onChange={(e) => setEmail(e.target.value)}
       >
-        <Input Input allowClear style={{ width: 400 }} placeholder='Email'/>
+        <Input Input allowClear style={{ width: 400 }} placeholder="Email" />
       </Form.Item>
       <Form.Item
         label="Address"
@@ -77,14 +73,13 @@ const Add = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your address!',
+            message: "Please input your address!",
           },
         ]}
-        onChange={(e) => setAddress( e.target.value )}
+        onChange={(e) => setAddress(e.target.value)}
       >
-        <Input Input allowClear style={{ width: 400 }} placeholder='Address'/>
+        <Input Input allowClear style={{ width: 400 }} placeholder="Address" />
       </Form.Item>
-      
 
       <Form.Item
         wrapperCol={{
@@ -97,7 +92,7 @@ const Add = (props) => {
         </Button>
       </Form.Item>
     </Form>
-  )
-}
+  );
+};
 
-export default Add
+export default Add;

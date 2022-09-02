@@ -1,21 +1,16 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input ,Alert} from 'antd';
+import { Button,  Form, Input ,Alert} from 'antd';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Demo2 from '../Home/Home';
-import Home from '../Home/Home';
+import { useNavigate } from 'react-router-dom';
 const Logins = () => {
 
+  const navigate = useNavigate()
   const [flag, setFlag] = useState(false);
-
-  const [home, setHome] = useState(true);
 
 const [validation,setValidation]=useState(false);
   const onFinish = (values) => {
     console.log('Success:', values);
-    // console.log(values.email)
-    // console.log(values.Password)
-    // values.preventDefault();
+    
     let pass = localStorage
       .getItem("Password")
       .replace(/"/g, "");
@@ -27,15 +22,23 @@ console.log(mail)
 console.log(pass)
 console.log(values.email)
  console.log(values.Password)
-    if (mail!=values.email || pass!=values.Password) {
+    if (mail!==values.email || pass!==values.Password) {
       setFlag(true);
       console.log("EMPTY");
 
     } else {
-      setHome(false);
+      
       setFlag(false);
       setValidation(true)
     }
+    
+  
+    {if(mail==values.email && pass==values.Password){
+        setTimeout(()=>{
+     
+            
+          navigate('/home')
+       },1000)}}
   }
 
 
@@ -50,7 +53,7 @@ console.log(values.email)
 
     <div >
        
-    {home ? (
+    
     <Form
       name="basic"
       labelCol={{
@@ -65,6 +68,9 @@ console.log(values.email)
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+    
+      
+
     >
       <Form.Item
         name="email"
@@ -116,9 +122,7 @@ console.log(values.email)
   <Alert message="login successfull " showIcon />
           )}
         </Form>
-      ) : (
-        <NavLink to='/home'><Home/></NavLink>
-      )}
+      
      </div>
   );
 };

@@ -1,36 +1,27 @@
 import { useState } from "react";
 import "antd/dist/antd.css";
-// import { UserOutlined } from '@ant-design/icons';
-import { Button,  Input,Form } from "antd";
+import { Button, Input, Form } from "antd";
 
 import { useNavigate } from "react-router-dom";
 const Edit = (props) => {
-    const navigate = useNavigate()
-    // const [isEditing, setIsEditing] = useState(false);
-    const [dataSource, setDataSource] = useState(props.data || {})
-    const [editingStudent, setEditingStudent] = useState(null);
-    console.log('data',dataSource)
-//     const [isAdd, setIsAdd] = useState(false);
-//   const[name,setName]=useState('')
-//   const[email,setEmail]=useState('')
-//   const[address,setAddress]=useState('')
-  console.log('www', props.data)
+  const navigate = useNavigate();
+  const [dataSource, setDataSource] = useState(props.data || {});
+  const [editingStudent, setEditingStudent] = useState(null);
+  console.log("data", dataSource);
 
-//   const onEditStudent = (record) => {
+  console.log("www", props.data);
 
-//     setEditingStudent({ ...record });
-//   };
-      const onFinish = (values) => {
-        props.handleAppData(values)
-        console.log('Success:', values);
-        setDataSource(values)
-        // localStorage.setItem(values.email, JSON.stringify(values))
-        navigate('/home')
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+  const onFinish = (values) => {
+    props.handleAppData(values);
+    console.log("Success:", values);
+    setDataSource(values);
+
+    navigate("/home");
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   return (
     <Form
@@ -44,9 +35,8 @@ const Edit = (props) => {
       initialValues={{
         name: dataSource.name,
         email: dataSource.email,
-        address: dataSource.address
+        address: dataSource.address,
       }}
-      
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -57,17 +47,16 @@ const Edit = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your name!',
+            message: "Please input your name!",
           },
         ]}
-    
         onChange={(e) => {
-              setDataSource((pre) => {
-                return { ...pre, name: e.target.value };
-              });
-            }}
+          setDataSource((pre) => {
+            return { ...pre, name: e.target.value };
+          });
+        }}
       >
-        <Input allowClear style={{ width: 400 }} placeholder='Name'/>
+        <Input allowClear style={{ width: 400 }} placeholder="Name" />
       </Form.Item>
 
       <Form.Item
@@ -76,17 +65,17 @@ const Edit = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your email!',
+            message: "Please input your email!",
           },
         ]}
         value={editingStudent?.email}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, email: e.target.value };
-              });
-            }}
+        onChange={(e) => {
+          setEditingStudent((pre) => {
+            return { ...pre, email: e.target.value };
+          });
+        }}
       >
-        <Input allowClear style={{ width: 400 }} placeholder='Email'/>
+        <Input allowClear style={{ width: 400 }} placeholder="Email" />
       </Form.Item>
       <Form.Item
         label="Address"
@@ -94,19 +83,18 @@ const Edit = (props) => {
         rules={[
           {
             required: true,
-            message: 'Please input your address!',
+            message: "Please input your address!",
           },
         ]}
         value={editingStudent?.address}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, address: e.target.value };
-              });
-            }}
+        onChange={(e) => {
+          setEditingStudent((pre) => {
+            return { ...pre, address: e.target.value };
+          });
+        }}
       >
-        <Input allowClear style={{ width: 400 }} placeholder='Address' />
+        <Input allowClear style={{ width: 400 }} placeholder="Address" />
       </Form.Item>
-      
 
       <Form.Item
         wrapperCol={{
@@ -119,7 +107,7 @@ const Edit = (props) => {
         </Button>
       </Form.Item>
     </Form>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;

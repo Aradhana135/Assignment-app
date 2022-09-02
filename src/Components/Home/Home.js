@@ -1,20 +1,29 @@
-import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   EditOutlined,
   DeleteOutlined,
-  EyeOutlined
+  EyeOutlined,
+  PoweroffOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { Button, Table, Modal,  Typography } from "antd";
+import { Button, Table, Modal, Typography, Alert } from "antd";
+const { Text } = Typography;
 function Home(props) {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+  const [loadingData, setLoadingData] = useState(true);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [viewData, setViewData] = useState({});
-  
-  const [dataSource, setDataSource] = useState(props.appData);
+  const [LogoutValidation, setLogoutValidation] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingData(false);
+    }, 1000);
+  });
+
   const columns = [
     {
       key: "1",
@@ -43,18 +52,15 @@ function Home(props) {
         return (
           <>
             <EyeOutlined
-              onClick={() =>  
-                showModal(record)
-              
-        }
+              onClick={() => showModal(record)}
               style={{ color: "blue", marginRight: 10 }}
             />
-           
+
             <EditOutlined
               onClick={(e) => {
-                e.preventDefault()
-                props.handleData(record)
-                navigate('/edit')
+                e.preventDefault();
+                props.handleData(record);
+                navigate("/edit");
               }}
             />
             <DeleteOutlined
@@ -69,21 +75,16 @@ function Home(props) {
     },
   ];
 
-  
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
       okText: "Yes",
       okType: "danger",
       onOk: () => {
-        setDataSource((pre) => {
-          return pre.filter((student) => student.id !== record.id);
-        });
+        props.handleDelete(record);
       },
     });
   };
-
- 
 
   const showModal = (record) => {
     setVisible(true);
@@ -105,29 +106,55 @@ function Home(props) {
   return (
     <div className="App">
       <header className="App-header">
-        
-
         <Button
+          type="primary"
           onClick={(e) => {
-            e.preventDefault()
-            
-            navigate('/add')}}
+            e.preventDefault();
+
+            navigate("/add");
+          }}
           style={{ color: "blue", marginBottom: 10, marginTop: 5 }}
+          icon={<UserAddOutlined />}
         >
           Add
         </Button>
 
-        <Button type='primary'
+        <Button
+        type='primary'
           onClick={(e) => {
-            e.preventDefault()
-           
-            navigate('/login')}}
-          style={{ color: "blue", marginBottom: 10, marginTop: 80,marginLeft:1150 }}
+            e.preventDefault();
+            setLogoutValidation(true);
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000);
+          }}
+          style={{ color: "blue", marginTop: 10, marginLeft: 1250 }}
+          icon={<PoweroffOutlined />}
         >
           Logout
         </Button>
-        <Table columns={columns} dataSource={dataSource} ></Table>
-        
+
+        {LogoutValidation && (
+          <Alert message="Logout Successfull" type="success" />
+        )}
+        {console.log("logout", LogoutValidation)}
+        <div>
+          <center>
+            {" "}
+            <h1>
+              <Text strong style={{ color: "orange" ,fontFamily:'sans-serif'}}>
+                Student Details{" "}
+              </Text>
+            </h1>
+          </center>
+          <Table
+            columns={columns}
+            dataSource={props.appData}
+            pagination={true}
+            loading={loadingData}
+          ></Table>
+        </div>
+        {console.log("loading", loadingData)}
         <Modal
           visible={visible}
           title="View"
@@ -140,12 +167,14 @@ function Home(props) {
             </Button>,
           ]}
         >
-        < Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
-        < Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
-        < Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
-        < Typography.Paragraph> Address: {viewData.address}</Typography.Paragraph>
+          <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
+          <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
+          <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
+          <Typography.Paragraph>
+            {" "}
+            Address: {viewData.address}
+          </Typography.Paragraph>
         </Modal>
-        
       </header>
     </div>
   );
