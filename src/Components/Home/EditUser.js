@@ -1,32 +1,30 @@
 import { useState } from "react";
-
 import "antd/dist/antd.css";
 import { Button, Input, Form } from "antd";
+import "../styles.css";
 import { useNavigate } from "react-router-dom";
-const Add = (props) => {
+const EditDetails = (props) => {
   const navigate = useNavigate();
-
   const [dataSource, setDataSource] = useState(props.data || {});
+  const [editingStudent, setEditingStudent] = useState(null);
+  // console.log("data", dataSource);
 
-  console.log("data", dataSource);
-
-  const [, setName] = useState("");
-  const [, setEmail] = useState("");
-  const [, setAddress] = useState("");
-  console.log("www", props.data);
+  // console.log("www", props.data);
 
   const onFinish = (values) => {
-    props.handleAdd(values);
-
-    console.log("Success:", values);
+    props.handleAppData(values);
+    // console.log("Success:", values);
     setDataSource(values);
 
     navigate("/home");
   };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const handleCancel = () => {
+    navigate("/home");
   };
+  const onFinishFailed = (errorInfo) => {
+    // console.log("Failed:", errorInfo);
+  };
+
   return (
     <Form
       name="basic"
@@ -35,6 +33,11 @@ const Add = (props) => {
       }}
       wrapperCol={{
         span: 16,
+      }}
+      initialValues={{
+        name: dataSource.name,
+        email: dataSource.email,
+        address: dataSource.address,
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -49,9 +52,13 @@ const Add = (props) => {
             message: "Please input your name!",
           },
         ]}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          setDataSource((pre) => {
+            return { ...pre, name: e.target.value };
+          });
+        }}
       >
-        <Input allowClear style={{ width: 400 }} placeholder="Name" />
+        <Input allowClear placeholder="Name" className="input-css" />
       </Form.Item>
 
       <Form.Item
@@ -63,9 +70,14 @@ const Add = (props) => {
             message: "Please input your email!",
           },
         ]}
-        onChange={(e) => setEmail(e.target.value)}
+        value={editingStudent?.email}
+        onChange={(e) => {
+          setEditingStudent((pre) => {
+            return { ...pre, email: e.target.value };
+          });
+        }}
       >
-        <Input Input allowClear style={{ width: 400 }} placeholder="Email" />
+        <Input allowClear className="input-css" placeholder="Email" />
       </Form.Item>
       <Form.Item
         label="Address"
@@ -76,9 +88,14 @@ const Add = (props) => {
             message: "Please input your address!",
           },
         ]}
-        onChange={(e) => setAddress(e.target.value)}
+        value={editingStudent?.address}
+        onChange={(e) => {
+          setEditingStudent((pre) => {
+            return { ...pre, address: e.target.value };
+          });
+        }}
       >
-        <Input Input allowClear style={{ width: 400 }} placeholder="Address" />
+        <Input allowClear className="input-css" placeholder="Address" />
       </Form.Item>
 
       <Form.Item
@@ -90,9 +107,17 @@ const Add = (props) => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
+        <Button
+          type="primary"
+          htmlType="submit"
+          onClick={handleCancel}
+          className="Button-css"
+        >
+          Cancel
+        </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default Add;
+export default EditDetails;

@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-
+import "antd/dist/antd.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Logins from "./Components/LogIn/Logins";
 import Page404 from "./Components/Page404/Page404";
 import Forms from "./Components/SignUp/Form";
 import Home from "./Components/Home/Home";
-import Edit from "./Components/Home/Edit";
-import Add from "./Components/Home/Add";
 import axios from "axios";
+import AddDetails from "./Components/Home/AddUser";
+import EditDetails from "./Components/Home/EditUser";
 
 const App = () => {
+  //API response data
   const [appData, setAppData] = useState([]);
   const [data, setData] = useState({});
-
+  //
   const handleData = (dataSource) => {
     setData(dataSource);
   };
-
+  //Fetching data of an API
   const fetchPost = async () => {
     const response = await axios(
       "https://630f5ca737925634188dc240.mockapi.io/crud/Users"
@@ -26,18 +27,15 @@ const App = () => {
   useEffect(() => {
     fetchPost();
   }, []);
-
-  const handleAppData = (item) => {
-    console.log("aaa", item);
+  // Editing existing records
+  const handleEditData = (item) => {
     const newData = appData.map((value) =>
       data.id === value.id ? { ...item, id: data.id } : value
     );
 
-    console.log(data.id);
-
     setAppData(newData, data.id);
   };
-
+  //Adding new records
   const handleAdd = (values) => {
     const newValue = {
       ...values,
@@ -45,14 +43,14 @@ const App = () => {
     };
     setAppData([...appData, newValue]);
   };
-
+  //Deleting existing records
   const handleDelete = (record) => {
     setAppData((pre) => pre.filter((rec) => rec.id !== record.id));
   };
 
   return (
     <>
-      <div style={{ color: "blue", marginBottom: 20, marginTop: 40 }}>
+      <div className="main-div-css">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Forms />} />
@@ -68,12 +66,14 @@ const App = () => {
               }
             />
             <Route
-              path="/edit"
-              element={<Edit data={data} handleAppData={handleAppData} />}
+              path="/editUser"
+              element={
+                <EditDetails data={data} handleEditData={handleEditData} />
+              }
             />
             <Route
-              path="/add"
-              element={<Add data={data} handleAdd={handleAdd} />}
+              path="/addUser"
+              element={<AddDetails data={data} handleAdd={handleAdd} />}
             />
             <Route path="*" element={<Page404 />} />
           </Routes>

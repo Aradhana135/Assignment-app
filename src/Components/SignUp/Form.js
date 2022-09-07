@@ -67,9 +67,10 @@ const Forms = () => {
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
-        style={{
-          width: 70,
-        }}
+        // style={{
+        //   width: 70,
+        // }}
+        className="selectPrefix"
       >
         <Option value="91">+91</Option>
         <Option value="87">+87</Option>
@@ -79,9 +80,10 @@ const Forms = () => {
   const suffixSelector = (
     <Form.Item name="suffix" noStyle>
       <Select
-        style={{
-          width: 50,
-        }}
+        // style={{
+        //   width: 50,
+        // }}
+        className="selectSuffix"
       >
         <Option value="USD">$</Option>
         <Option value="CNY">¥</Option>
@@ -105,7 +107,7 @@ const Forms = () => {
     value: website,
   }));
   return (
-    <div width="300px" color="orange">
+    <div>
       <Form
         {...formItemLayout}
         form={form}
@@ -213,9 +215,10 @@ const Forms = () => {
         >
           <Input
             addonBefore={prefixSelector}
-            style={{
-              width: "100%",
-            }}
+            // style={{
+            //   width: "100%",
+            // }}
+            className="input-prefixSelector"
             maxLength={10}
           />
         </Form.Item>
@@ -232,9 +235,10 @@ const Forms = () => {
         >
           <InputNumber
             addonAfter={suffixSelector}
-            style={{
-              width: "100%",
-            }}
+            // style={{
+            //   width: "100%",
+            // }}
+            className="input-prefixSelector"
           />
         </Form.Item>
 

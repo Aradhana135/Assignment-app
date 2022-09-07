@@ -1,0 +1,71 @@
+h1.page-error {
+    color: red;
+    margin-left: 50px;
+}
+
+Button.Button-css {
+    margin: 10px;
+}
+
+Button.add-button-css {
+    margin-bottom: 10;
+    margin-top: 5;
+}
+
+Button.button-logout {
+    margin-top: 10;
+    margin-left: 1250px;
+}
+
+/* .input {
+    margin: 10px;
+    width: 200px;
+} */
+
+.eyeOutline {
+    margin-Right: 12px;
+    color: blue !important
+}
+
+.deleteOutlined-css {
+    margin-Right: 12px;
+    color: red !important
+}
+
+.editOutlined-css {
+    margin-Right: 12px;
+    color: blue
+}
+
+h1.text-tittle {
+    color: orange;
+    align-items: center;
+    text-align: center;
+    font-size: x-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.main-div-css {
+    margin: 60px;
+}
+
+
+.input-css {
+    max-width: 400px;
+}
+
+.selectPrefix {
+    max-width: 70px;
+}
+
+.selectSuffix {
+    max-width: 50px;
+}
+
+.input-prefixSelector {
+    max-width: 100%;
+}
+
+.signup-btn {
+    margin: 6px;
+}

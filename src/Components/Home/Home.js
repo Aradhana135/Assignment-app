@@ -1,5 +1,6 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles.css";
 import {
   EditOutlined,
   DeleteOutlined,
@@ -53,10 +54,11 @@ function Home(props) {
           <>
             <EyeOutlined
               onClick={() => showModal(record)}
-              style={{ color: "blue", marginRight: 10 }}
+              className={"eyeOutline"}
             />
 
             <EditOutlined
+              className="editOutlined-css"
               onClick={(e) => {
                 e.preventDefault();
                 props.handleData(record);
@@ -67,7 +69,7 @@ function Home(props) {
               onClick={() => {
                 onDeleteStudent(record);
               }}
-              style={{ color: "red", marginLeft: 12 }}
+              className="deleteOutlined-css"
             />
           </>
         );
@@ -104,80 +106,70 @@ function Home(props) {
   };
 
   return (
-    <div >
-      
-        <Button
-          type='primary'
+    <div>
+      <Button
+        type="primary"
+        onClick={(e) => {
+          e.preventDefault();
 
-    
-          onClick={(e) => {
-            e.preventDefault();
+          navigate("/add");
+        }}
+        className="add-button-css"
+        icon={<UserAddOutlined />}
+      >
+        Add
+      </Button>
 
-            navigate("/add");
-          }}
-          style={{  marginBottom: 10, marginTop: 5 }}
-          icon={<UserAddOutlined />}
-        >
-          Add
-        </Button>
+      <Button
+        type="primary"
+        onClick={(e) => {
+          e.preventDefault();
+          setLogoutValidation(true);
+          setTimeout(() => {
+            navigate("/login");
+          }, 1000);
+        }}
+        className="button-logout"
+        icon={<PoweroffOutlined />}
+      >
+        Logout
+      </Button>
 
-        <Button
-        type='primary'
-          onClick={(e) => {
-            e.preventDefault();
-            setLogoutValidation(true);
-            setTimeout(() => {
-              navigate("/login");
-            }, 1000);
-          }}
-          style={{ marginTop: 10, marginLeft: 1250 }}
-          icon={<PoweroffOutlined />}
-        >
-          Logout
-        </Button>
+      {LogoutValidation && (
+        <Alert message="Logout Successfull" type="success" />
+      )}
 
-        {LogoutValidation && (
-          <Alert message="Logout Successfull" type="success" />
-        )}
-        {console.log("logout", LogoutValidation)}
-        <div>
-          <center>
-            {" "}
-            <h1>
-              <Text strong style={{ color: "orange" ,fontFamily:'sans-serif'}}>
-                Student Details{" "}
-              </Text>
-            </h1>
-          </center>
-          <Table
-            columns={columns}
-            dataSource={props.appData}
-            pagination={true}
-            loading={loadingData}
-          ></Table>
-        </div>
-        {console.log("loading", loadingData)}
-        <Modal
-          visible={visible}
-          title="View"
-          onOk={handleOk}
-          loading={loading}
-          onCancel={handleCancel}
-          footer={[
-            <Button key="back" onClick={handleCancel}>
-              Return
-            </Button>,
-          ]}
-        >
-          <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
-          <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
-          <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
-          <Typography.Paragraph>
-            {" "}
-            Address: {viewData.address}
-          </Typography.Paragraph>
-        </Modal>
-     
+      <div>
+        <h1 className="text-tittle">Student Details</h1>
+
+        <Table
+          columns={columns}
+          dataSource={props.appData}
+          pagination={true}
+          loading={loadingData}
+        ></Table>
+      </div>
+
+      <Modal
+        visible={visible}
+        title="View"
+        onOk={handleOk}
+        loading={loading}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Return
+          </Button>,
+        ]}
+      >
+        <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
+        <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
+        <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
+        <Typography.Paragraph>
+          {" "}
+          Address: {viewData.address}
+        </Typography.Paragraph>
+      </Modal>
     </div>
   );
 }
