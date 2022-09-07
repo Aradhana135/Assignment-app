@@ -9,69 +9,50 @@ import {
   Select,
   Alert,
 } from "antd";
-import Logins from "../LogIn/Logins";
-
 import { useNavigate } from "react-router-dom";
-
+import { formItemLayout, tailFormItemLayout } from "./FormLayout";
 const { Option } = Select;
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 8,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 8,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 16,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const Forms = () => {
   const navigate = useNavigate();
+  //for all the required input field
   const [flag, setFlag] = useState(false);
-  const [login, setLogin] = useState(true);
-
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    localStorage.setItem("Email", JSON.stringify(values.email));
-    localStorage.setItem("Password", JSON.stringify(values.password));
-    console.log("Saved in Local Storage");
+    // storing locally email and password
+    // localStorage.setItem("Email", JSON.stringify(values.email));
+    // localStorage.setItem(
+    //   JSON.stringify(values.email),
+    //   JSON.stringify(values.password)
+
+      
+    // );
+
+    let olddata = localStorage.getItem('formdata');
+    if(olddata==null){
+      olddata = []
+      olddata.push(values)
+      localStorage.setItem('formdata', JSON.stringify(olddata));
+    }else{
+      let oldArr = JSON.parse(olddata)
+      oldArr.push(values)
+      localStorage.setItem("formdata", JSON.stringify(oldArr))
+      console.log(oldArr,'hhg')
+    }
+  
+
     setFlag(false);
-    setLogin(false);
+
     if (!flag) {
+      //if all the input field is filled correctly navigate to login page
       navigate("/login");
     }
   };
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
-      <Select
-        // style={{
-        //   width: 70,
-        // }}
-        className="selectPrefix"
-      >
+      <Select className="selectPrefix">
         <Option value="91">+91</Option>
         <Option value="87">+87</Option>
       </Select>
@@ -79,12 +60,7 @@ const Forms = () => {
   );
   const suffixSelector = (
     <Form.Item name="suffix" noStyle>
-      <Select
-        // style={{
-        //   width: 50,
-        // }}
-        className="selectSuffix"
-      >
+      <Select className="selectSuffix">
         <Option value="USD">$</Option>
         <Option value="CNY">¥</Option>
       </Select>
@@ -215,9 +191,6 @@ const Forms = () => {
         >
           <Input
             addonBefore={prefixSelector}
-            // style={{
-            //   width: "100%",
-            // }}
             className="input-prefixSelector"
             maxLength={10}
           />
@@ -235,9 +208,6 @@ const Forms = () => {
         >
           <InputNumber
             addonAfter={suffixSelector}
-            // style={{
-            //   width: "100%",
-            // }}
             className="input-prefixSelector"
           />
         </Form.Item>
@@ -291,9 +261,7 @@ const Forms = () => {
           ]}
           {...tailFormItemLayout}
         >
-          <Checkbox>
-            I have read the <a href="">agreement</a>
-          </Checkbox>
+          <Checkbox>I have read the agreement</Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
@@ -303,7 +271,7 @@ const Forms = () => {
             type="primary"
             href="/login"
             htmlType="handleClick"
-            style={{ margin: "6px" }}
+            className="signup-btn"
           >
             Login
           </Button>

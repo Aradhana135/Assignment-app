@@ -8,9 +8,8 @@ import {
   PoweroffOutlined,
   UserAddOutlined,
 } from "@ant-design/icons";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { Button, Table, Modal, Typography, Alert } from "antd";
-const { Text } = Typography;
 function Home(props) {
   const navigate = useNavigate();
   const [loadingData, setLoadingData] = useState(true);
@@ -147,6 +146,7 @@ function Home(props) {
           dataSource={props.appData}
           pagination={true}
           loading={loadingData}
+          key={props.appData.id}
         ></Table>
       </div>
 

@@ -13,7 +13,7 @@ const App = () => {
   //API response data
   const [appData, setAppData] = useState([]);
   const [data, setData] = useState({});
-  //
+  // handling existing data
   const handleData = (dataSource) => {
     setData(dataSource);
   };
@@ -66,13 +66,13 @@ const App = () => {
               }
             />
             <Route
-              path="/editUser"
+              path="/edit"
               element={
                 <EditDetails data={data} handleEditData={handleEditData} />
               }
             />
             <Route
-              path="/addUser"
+              path="/add"
               element={<AddDetails data={data} handleAdd={handleAdd} />}
             />
             <Route path="*" element={<Page404 />} />
