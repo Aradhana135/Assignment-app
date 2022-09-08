@@ -12,10 +12,15 @@ import "antd/dist/antd.min.css";
 import { Button, Table, Modal, Typography, Alert } from "antd";
 function Home(props) {
   const navigate = useNavigate();
+  //for adding loading icon while loading the data into the table
   const [loadingData, setLoadingData] = useState(true);
+//for loading data for view
   const [loading, setLoading] = useState(false);
+  //flag for visible data of view component
   const [visible, setVisible] = useState(false);
+  //storing data that to be visible 
   const [viewData, setViewData] = useState({});
+  //flag for logout validation
   const [LogoutValidation, setLogoutValidation] = useState(false);
 
   useEffect(() => {
@@ -23,7 +28,7 @@ function Home(props) {
       setLoadingData(false);
     }, 1000);
   });
-
+//coloms of table
   const columns = [
     {
       key: "1",
@@ -51,11 +56,12 @@ function Home(props) {
       render: (record) => {
         return (
           <>
+          {/* rendering EyeOutlined component for view  */}
             <EyeOutlined
               onClick={() => showModal(record)}
               className={"eyeOutline"}
             />
-
+{/* rendering EditOutlined component for edit  */}
             <EditOutlined
               className="editOutlined-css"
               onClick={(e) => {
@@ -64,6 +70,7 @@ function Home(props) {
                 navigate("/edit");
               }}
             />
+            {/* rendering DeleteOutlined component for view  */}
             <DeleteOutlined
               onClick={() => {
                 onDeleteStudent(record);
@@ -75,7 +82,7 @@ function Home(props) {
       },
     },
   ];
-
+//model for delete
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -149,7 +156,7 @@ function Home(props) {
           key={props.appData.id}
         ></Table>
       </div>
-
+{/* Model for view */}
       <Modal
         visible={visible}
         title="View"
@@ -162,6 +169,7 @@ function Home(props) {
           </Button>,
         ]}
       >
+        {/* rendering view data through the Model */}
         <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
         <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
         <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
