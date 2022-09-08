@@ -2,7 +2,7 @@ import { useState } from "react";
 import "antd/dist/antd.min.css";
 import "../styles.css";
 import { useNavigate } from "react-router-dom";
-import MyForm from "./MyForm";
+import MyForm from "./AddEditForm";
 const EditDetails = (props) => {
   const navigate = useNavigate();
   //fetched user data

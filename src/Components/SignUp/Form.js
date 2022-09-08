@@ -20,27 +20,18 @@ const Forms = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    // storing locally email and password
-    // localStorage.setItem("Email", JSON.stringify(values.email));
-    // localStorage.setItem(
-    //   JSON.stringify(values.email),
-    //   JSON.stringify(values.password)
-
+    //storing form data in local storage
+    let olddata = localStorage.getItem("formdata");
+    if (olddata == null) {
+      olddata = [];
+      olddata.push(values);
+      localStorage.setItem("formdata", JSON.stringify(olddata));
+    } else {
+      let oldArr = JSON.parse(olddata);
+      oldArr.push(values);
+      localStorage.setItem("formdata", JSON.stringify(oldArr));
       
-    // );
-
-    let olddata = localStorage.getItem('formdata');
-    if(olddata==null){
-      olddata = []
-      olddata.push(values)
-      localStorage.setItem('formdata', JSON.stringify(olddata));
-    }else{
-      let oldArr = JSON.parse(olddata)
-      oldArr.push(values)
-      localStorage.setItem("formdata", JSON.stringify(oldArr))
-      console.log(oldArr,'hhg')
     }
-  
 
     setFlag(false);
 

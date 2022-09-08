@@ -12,7 +12,7 @@ const Logins = () => {
     //getting form data from local storage
     let olddata = localStorage.getItem("formdata");
     let oldArr = JSON.parse(olddata);
-    //comparing 
+    //comparing login's email & password with local storage email & password
     const x = oldArr.filter(
       (arr) => arr.email === values.email && arr.password === values.password
     );
@@ -20,6 +20,7 @@ const Logins = () => {
     if (x.length === 0) {
       setFlag(true);
     } else {
+      //validation is true then navigate to home page after 1 sec.
       setValidation(true);
       setTimeout(() => {
         navigate("/home");
@@ -28,6 +29,7 @@ const Logins = () => {
   };
   return (
     <div>
+      {/* login form layout */}
       <Form
         name="basic"
         labelCol={{
@@ -83,7 +85,7 @@ const Logins = () => {
           </Button>
         </Form.Item>
       </Form>
-
+      {/* if flag is true , then login successfull */}
       {flag && (
         <Alert
           message="Error!! Try again with correct credentials "
@@ -91,7 +93,7 @@ const Logins = () => {
           showIcon
         />
       )}
-
+      {/* if validation is true , then login successfull */}
       {validation && <Alert message="login successfull" showIcon />}
     </div>
   );
