@@ -201,13 +201,17 @@ const Forms = (props) => {
               required: true,
               message: "Please input your phone number!",
             },
+            {
+            max: 10,
+            message:"Maximum length should be 10",
+          }
           ]}
         >
           <Input
             type="number"
             addonBefore={prefixSelector}
             className="input-prefixSelector"
-            maxLength={10}
+            
           />
         </Form.Item>
 
