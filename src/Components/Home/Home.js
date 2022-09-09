@@ -14,8 +14,6 @@ function Home(props) {
   const navigate = useNavigate();
   //for adding loading icon while loading the data into the table
   const [loadingData, setLoadingData] = useState(true);
-  //for loading data for view
-  // const [loading, setLoading] = useState(false);
   //flag for visible data of view component
   const [visible, setVisible] = useState(false);
   //storing data that to be visible
@@ -99,14 +97,6 @@ function Home(props) {
     setViewData(record);
   };
 
-  const handleOk = () => {
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setVisible(false);
-    // }, 3000);
-  };
-
   const handleCancel = () => {
     setVisible(false);
   };
@@ -157,11 +147,9 @@ function Home(props) {
         ></Table>
       </div>
       {/* Model for view */}
-      <Modal 
+      <Modal
         visible={visible}
         title="View Details"
-        onOk={handleOk}
-        // loading={true}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
@@ -171,13 +159,12 @@ function Home(props) {
       >
         {/* rendering view data through the Model */}
         <Card>
-        <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
-        <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
-        <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
-        <Typography.Paragraph>
-          
-          Address: {viewData.address}
-        </Typography.Paragraph>
+          <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
+          <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
+          <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
+          <Typography.Paragraph>
+            Address: {viewData.address}
+          </Typography.Paragraph>
         </Card>
       </Modal>
     </div>

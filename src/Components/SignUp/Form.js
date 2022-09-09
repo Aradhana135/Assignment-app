@@ -134,16 +134,14 @@ const Forms = (props) => {
                 " Password must be in between 8-16 character with altleast one uppercase,lower case,numeric & special charcater!",
             },
           ]}
-          
         >
-          <Input.Password  allowClear/>
+          <Input.Password allowClear />
         </Form.Item>
 
         <Form.Item
           name="confirm"
           label="Confirm Password"
           dependencies={["password"]}
-          hasFeedback
           rules={[
             {
               required: true,
@@ -202,16 +200,15 @@ const Forms = (props) => {
               message: "Please input your phone number!",
             },
             {
-            max: 10,
-            message:"Maximum length should be 10",
-          }
+              max: 10,
+              message: "Maximum length should be 10",
+            },
           ]}
         >
           <Input
             type="number"
             addonBefore={prefixSelector}
             className="input-prefixSelector"
-            
           />
         </Form.Item>
 
