@@ -47,14 +47,17 @@ const App = () => {
   const handleDelete = (record) => {
     setAppData((pre) => pre.filter((rec) => rec.id !== record.id));
   };
+//getting form data from local storage
+let olddata = localStorage.getItem("formdata");
+let localOldArr = JSON.parse(olddata);
 
   return (
     <>
       <div className="main-div-css">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Forms />} />
-            <Route path="/login" element={<Logins />} />
+            <Route path="/" element={<Forms localOldArr={localOldArr} />} />
+            <Route path="/login" element={<Logins localOldArr={localOldArr}/>} />
             <Route
               path="/home"
               element={

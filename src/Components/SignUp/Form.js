@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Card } from "antd";
 import {
   AutoComplete,
   Button,
@@ -13,10 +14,11 @@ import { useNavigate } from "react-router-dom";
 import { formItemLayout, tailFormItemLayout } from "./FormLayout";
 const { Option } = Select;
 
-const Forms = () => {
+const Forms = (props) => {
   const navigate = useNavigate();
   //for all the required input field
   const [flag, setFlag] = useState(false);
+  const [alreadyLoginUser, setAlreadyLoginUser] = useState(false);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -30,18 +32,29 @@ const Forms = () => {
       let oldArr = JSON.parse(olddata);
       oldArr.push(values);
       localStorage.setItem("formdata", JSON.stringify(oldArr));
-      
     }
 
-    setFlag(false);
+    const alreadyUser = props.localOldArr.filter(
+      (arr) => arr.email === values.email
+    );
+    if (alreadyUser.length === 0) {
+      setAlreadyLoginUser(false);
 
-    if (!flag) {
-      //if all the input field is filled correctly navigate to login page
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+      setFlag(true);
+    } else {
+      setAlreadyLoginUser(true);
+      setFlag(false);
     }
+    console.log(alreadyLoginUser);
+    console.log(flag);
+    console.log(alreadyUser);
   };
 
   const prefixSelector = (
+    //prefix for select tag country code
     <Form.Item name="prefix" noStyle>
       <Select className="selectPrefix">
         <Option value="91">+91</Option>
@@ -49,6 +62,7 @@ const Forms = () => {
       </Select>
     </Form.Item>
   );
+  //prefix for selecting amount in USD / CNY
   const suffixSelector = (
     <Form.Item name="suffix" noStyle>
       <Select className="selectSuffix">
@@ -57,6 +71,7 @@ const Forms = () => {
       </Select>
     </Form.Item>
   );
+  //for storing domain that is .com,.org,.net
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
   const onWebsiteChange = (value) => {
@@ -74,7 +89,7 @@ const Forms = () => {
     value: website,
   }));
   return (
-    <div>
+    <Card>
       <Form
         {...formItemLayout}
         form={form}
@@ -105,15 +120,23 @@ const Forms = () => {
         <Form.Item
           name="password"
           label="Password"
+          type="password"
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+
+              message: " Please enter the correct password!",
+            },
+            {
+              pattern:
+                "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$",
+              message:
+                " Password must be in between 8-16 character with altleast one uppercase,lower case,numeric & special charcater!",
             },
           ]}
-          hasFeedback
+          
         >
-          <Input.Password />
+          <Input.Password  allowClear/>
         </Form.Item>
 
         <Form.Item
@@ -139,7 +162,7 @@ const Forms = () => {
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password allowClear />
         </Form.Item>
 
         <Form.Item
@@ -181,6 +204,7 @@ const Forms = () => {
           ]}
         >
           <Input
+            type="number"
             addonBefore={prefixSelector}
             className="input-prefixSelector"
             maxLength={10}
@@ -198,6 +222,7 @@ const Forms = () => {
           ]}
         >
           <InputNumber
+            type="number"
             addonAfter={suffixSelector}
             className="input-prefixSelector"
           />
@@ -259,18 +284,21 @@ const Forms = () => {
             Signup
           </Button>
           <Button
-            type="primary"
+            type="text"
             href="/login"
             htmlType="handleClick"
             className="signup-btn"
           >
-            Login
+            Already a user ? Login
           </Button>
         </Form.Item>
 
-        {flag && <Alert message="Error!! " type="error" showIcon />}
+        {flag && <Alert message="login successfull " type="success" showIcon />}
+        {alreadyLoginUser && (
+          <Alert message="User already exist! " type="error" showIcon />
+        )}
       </Form>
-    </div>
+    </Card>
   );
 };
 

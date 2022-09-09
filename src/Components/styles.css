@@ -69,3 +69,19 @@ h1.text-tittle {
 .signup-btn {
     margin: 6px;
 }
+.signup-btn-css{
+    margin: auto;
+
+}
+.ant-form{
+    max-width: 2000px;
+}
+.ant-card{
+    max-width: 1000px;
+    margin-left: 150px;
+    background-color: beige;
+    border-radius: 20px;
+    box-shadow: 0px 0px 12px 1px;
+
+
+}

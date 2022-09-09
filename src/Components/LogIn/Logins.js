@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Form, Input, Alert } from "antd";
+import { Button, Form, Input, Alert ,Card} from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const Logins = () => {
+const Logins = (props) => {
   const navigate = useNavigate();
   //for all the required input field
   const [flag, setFlag] = useState(false);
@@ -10,10 +10,10 @@ const Logins = () => {
   const [validation, setValidation] = useState(false);
   const onFinish = (values) => {
     //getting form data from local storage
-    let olddata = localStorage.getItem("formdata");
-    let oldArr = JSON.parse(olddata);
-    //comparing login's email & password with local storage email & password
-    const x = oldArr.filter(
+    // let olddata = localStorage.getItem("formdata");
+    // let oldArr = JSON.parse(olddata);
+    // comparing login's email & password with local storage email & password
+    const x = props.localOldArr.filter(
       (arr) => arr.email === values.email && arr.password === values.password
     );
 
@@ -28,7 +28,7 @@ const Logins = () => {
     }
   };
   return (
-    <div>
+    <Card>
       {/* login form layout */}
       <Form
         name="basic"
@@ -83,6 +83,15 @@ const Logins = () => {
           <Button type="primary" htmlType="submit">
             Login
           </Button>
+
+          <Button
+            type="text"
+            href="/"
+            className="signup-btn-css"
+            htmlType="submit"
+          >
+            Need an account ? SignUp
+          </Button>
         </Form.Item>
       </Form>
       {/* if flag is true , then login successfull */}
@@ -95,7 +104,8 @@ const Logins = () => {
       )}
       {/* if validation is true , then login successfull */}
       {validation && <Alert message="login successfull" showIcon />}
-    </div>
+      
+      </Card>
   );
 };
 

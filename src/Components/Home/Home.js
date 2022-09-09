@@ -9,16 +9,16 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.min.css";
-import { Button, Table, Modal, Typography, Alert } from "antd";
+import { Button, Table, Modal, Typography, Alert, Card } from "antd";
 function Home(props) {
   const navigate = useNavigate();
   //for adding loading icon while loading the data into the table
   const [loadingData, setLoadingData] = useState(true);
-//for loading data for view
-  const [loading, setLoading] = useState(false);
+  //for loading data for view
+  // const [loading, setLoading] = useState(false);
   //flag for visible data of view component
   const [visible, setVisible] = useState(false);
-  //storing data that to be visible 
+  //storing data that to be visible
   const [viewData, setViewData] = useState({});
   //flag for logout validation
   const [LogoutValidation, setLogoutValidation] = useState(false);
@@ -28,7 +28,7 @@ function Home(props) {
       setLoadingData(false);
     }, 1000);
   });
-//coloms of table
+  //coloms of table
   const columns = [
     {
       key: "1",
@@ -56,12 +56,12 @@ function Home(props) {
       render: (record) => {
         return (
           <>
-          {/* rendering EyeOutlined component for view  */}
+            {/* rendering EyeOutlined component for view  */}
             <EyeOutlined
               onClick={() => showModal(record)}
               className={"eyeOutline"}
             />
-{/* rendering EditOutlined component for edit  */}
+            {/* rendering EditOutlined component for edit  */}
             <EditOutlined
               className="editOutlined-css"
               onClick={(e) => {
@@ -82,7 +82,7 @@ function Home(props) {
       },
     },
   ];
-//model for delete
+  //model for delete
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -100,11 +100,11 @@ function Home(props) {
   };
 
   const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setVisible(false);
-    }, 3000);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setVisible(false);
+    // }, 3000);
   };
 
   const handleCancel = () => {
@@ -156,12 +156,12 @@ function Home(props) {
           key={props.appData.id}
         ></Table>
       </div>
-{/* Model for view */}
-      <Modal
+      {/* Model for view */}
+      <Modal 
         visible={visible}
-        title="View"
+        title="View Details"
         onOk={handleOk}
-        loading={loading}
+        // loading={true}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
@@ -170,13 +170,15 @@ function Home(props) {
         ]}
       >
         {/* rendering view data through the Model */}
+        <Card>
         <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
         <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
         <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
         <Typography.Paragraph>
-          {" "}
+          
           Address: {viewData.address}
         </Typography.Paragraph>
+        </Card>
       </Modal>
     </div>
   );

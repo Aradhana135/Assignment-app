@@ -1,17 +1,15 @@
 //Form for add and edit user
-import React, { useState } from "react";
-import { Button, Input, Form } from "antd";
+import React from "react";
+import { Button, Input, Form ,Card} from "antd";
 
 function MyForm(props) {
-  const [, setName] = useState("");
-  const [, setEmail] = useState("");
-  const [, setAddress] = useState("");
-
+  
   return (
+    <Card>
     <Form
       name="basic"
       labelCol={{
-        span: 8,
+        span:8,
       }}
       wrapperCol={{
         span: 16,
@@ -33,21 +31,26 @@ function MyForm(props) {
             message: "Please input your name!",
           },
         ]}
-        onChange={(e) => setName(e.target.value)}
+      
       >
         <Input allowClear className="input-css" placeholder="Name" />
       </Form.Item>
 
       <Form.Item
         label="Email"
+        type="email"
         name="email"
         rules={[
           {
+            type: "email",
+            message: "The input is not valid E-mail!",
+          },
+          {
             required: true,
-            message: "Please input your email!",
+            message: "Please input your E-mail!",
           },
         ]}
-        onChange={(e) => setEmail(e.target.value)}
+        
       >
         <Input Input allowClear className="input-css" placeholder="Email" />
       </Form.Item>
@@ -60,7 +63,7 @@ function MyForm(props) {
             message: "Please input your address!",
           },
         ]}
-        onChange={(e) => setAddress(e.target.value)}
+        
       >
         <Input Input allowClear className="input-css" placeholder="Address" />
       </Form.Item>
@@ -79,6 +82,7 @@ function MyForm(props) {
         </Button>
       </Form.Item>
     </Form>
+    </Card>
   );
 }
 
