@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Logins from "./Components/LogIn/Logins";
 import Page404 from "./Components/Page404/Page404";
-import Forms from "./Components/SignUp/Form";
-import Home from "./Components/Home/Home";
+import Forms from "./Components/SignUp/SignUp";
+import Users from "./Components/Home/Users";
 import axios from "axios";
 import AddDetails from "./Components/Home/AddUser";
 import EditDetails from "./Components/Home/EditUser";
+import Protected from "./Protected";
+import Home from "./Components/Home/Home";
 
 const App = () => {
   //API response data
@@ -47,26 +50,42 @@ const App = () => {
   const handleDelete = (record) => {
     setAppData((pre) => pre.filter((rec) => rec.id !== record.id));
   };
-//getting form data from local storage
-let olddata = localStorage.getItem("formdata");
-let localOldArr = JSON.parse(olddata);
+  //getting form data from local storage
+  let olddata = localStorage.getItem("formdata");
+  let localOldArr = JSON.parse(olddata);
 
   return (
     <>
       <div className="main-div-css">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Forms localOldArr={localOldArr} />} />
-            <Route path="/login" element={<Logins localOldArr={localOldArr}/>} />
+            <Route path="/" element={<Home />} />
             <Route
-              path="/home"
+              path="/signup"
+              element={<Forms localOldArr={localOldArr} />}
+            />
+
+            <Route
+              path="/login"
+              element={<Logins localOldArr={localOldArr} />}
+            />
+            <Route
+              path="/users"
               element={
-                <Home
-                  handleData={handleData}
-                  appData={appData}
-                  handleDelete={handleDelete}
-                />
+                <Protected>
+                  <Users
+                    handleData={handleData}
+                    appData={appData}
+                    handleDelete={handleDelete}
+                  />
+                </Protected>
               }
+              /* // <Home */
+              // handleData={handleData}
+              // appData={appData}
+              // handleDelete={handleDelete}
+              // />
+              // }
             />
             <Route
               path="/edit"

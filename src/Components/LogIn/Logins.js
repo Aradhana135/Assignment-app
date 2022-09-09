@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Form, Input, Alert ,Card} from "antd";
+import { Button, Form, Input, Alert, Card } from "antd";
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Logins = (props) => {
@@ -21,13 +22,17 @@ const Logins = (props) => {
       setFlag(true);
     } else {
       //validation is true then navigate to home page after 1 sec.
+      localStorage.setItem("login", true);
       setValidation(true);
+      setFlag(false);
       setTimeout(() => {
-        navigate("/home");
+        navigate("/users");
       }, 1000);
     }
   };
   return (
+    <div>
+   <div className="form-cls">
     <Card>
       {/* login form layout */}
       <Form
@@ -46,7 +51,7 @@ const Logins = (props) => {
       >
         <Form.Item
           name="email"
-          label="E-mail"
+          // label="E-mail"
           rules={[
             {
               type: "email",
@@ -58,11 +63,11 @@ const Logins = (props) => {
             },
           ]}
         >
-          <Input />
+          <Input prefix={<UserOutlined  />}placeholder='Enter Email'/>
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          // label="Password"
           name="password"
           rules={[
             {
@@ -71,14 +76,14 @@ const Logins = (props) => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password prefix={<LockOutlined/>} placeholder='Enter password' />
         </Form.Item>
 
         <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+        // wrapperCol={{
+        //   offset: 8,
+        //   span: 16,
+        // }}
         >
           <Button type="primary" htmlType="submit">
             Login
@@ -94,6 +99,9 @@ const Logins = (props) => {
           </Button>
         </Form.Item>
       </Form>
+      </Card>
+      </div>
+      <div className="alert-msg-cls">
       {/* if flag is true , then login successfull */}
       {flag && (
         <Alert
@@ -104,8 +112,8 @@ const Logins = (props) => {
       )}
       {/* if validation is true , then login successfull */}
       {validation && <Alert message="login successfull" showIcon />}
-      
-      </Card>
+      </div>
+      </div>
   );
 };
 

@@ -1,174 +1,66 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Layout, Menu } from "antd";
 import "../styles.css";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-  PoweroffOutlined,
-  UserAddOutlined,
-} from "@ant-design/icons";
-import "antd/dist/antd.min.css";
-import { Button, Table, Modal, Typography, Alert, Card } from "antd";
-function Home(props) {
-  const navigate = useNavigate();
-  //for adding loading icon while loading the data into the table
-  const [loadingData, setLoadingData] = useState(true);
-  //flag for visible data of view component
-  const [visible, setVisible] = useState(false);
-  //storing data that to be visible
-  const [viewData, setViewData] = useState({});
-  //flag for logout validation
-  const [LogoutValidation, setLogoutValidation] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoadingData(false);
-    }, 1000);
-  });
-  //coloms of table
-  const columns = [
-    {
-      key: "1",
-      title: "ID",
-      dataIndex: "id",
+import { useNavigate } from "react-router-dom";
+const {  Content } = Layout;
+const MenuList=[{
+key:'/signup',
+label:'SignUp'
+},
+{
+    key:'/login',
+    label:'Login'
     },
-    {
-      key: "2",
-      title: "Name",
-      dataIndex: "name",
-    },
-    {
-      key: "3",
-      title: "Email",
-      dataIndex: "email",
-    },
-    {
-      key: "4",
-      title: "Address",
-      dataIndex: "address",
-    },
-    {
-      key: "5",
-      title: "Actions",
-      render: (record) => {
-        return (
-          <>
-            {/* rendering EyeOutlined component for view  */}
-            <EyeOutlined
-              onClick={() => showModal(record)}
-              className={"eyeOutline"}
-            />
-            {/* rendering EditOutlined component for edit  */}
-            <EditOutlined
-              className="editOutlined-css"
-              onClick={(e) => {
-                e.preventDefault();
-                props.handleData(record);
-                navigate("/edit");
-              }}
-            />
-            {/* rendering DeleteOutlined component for view  */}
-            <DeleteOutlined
-              onClick={() => {
-                onDeleteStudent(record);
-              }}
-              className="deleteOutlined-css"
-            />
-          </>
-        );
-      },
-    },
-  ];
-  //model for delete
-  const onDeleteStudent = (record) => {
-    Modal.confirm({
-      title: "Are you sure, you want to delete this student record?",
-      okText: "Yes",
-      okType: "danger",
-      onOk: () => {
-        props.handleDelete(record);
-      },
-    });
-  };
-
-  const showModal = (record) => {
-    setVisible(true);
-    setViewData(record);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
-
+    // {
+    //     key:'/users',
+    //     label:'UserDetails'
+    //     },
+]
+const Home = () => {
+    const navigate=useNavigate();
+    const handelMenu=(menuItem)=>{
+       navigate(menuItem.key) 
+    }
   return (
-    <div>
-      <Button
-        type="primary"
-        onClick={(e) => {
-          e.preventDefault();
-
-          navigate("/add");
+    <Layout className="layout">
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["/1"]}
+      items={MenuList}
+      onClick={handelMenu}
+      >
+        {/* <Menu.Item key="1" href='/signup' >
+          SignUp
+        </Menu.Item>
+        <Menu.Item key="2">Login</Menu.Item>
+        <Menu.Item key="3" >Users Details</Menu.Item> */}
+      </Menu>
+      {/* <Header>
+        Header
+      </Header> */}
+      <Content
+        style={{
+          padding: "0 50px",
         }}
-        className="add-button-css"
-        icon={<UserAddOutlined />}
       >
-        Add
-      </Button>
-
-      <Button
-        type="primary"
-        onClick={(e) => {
-          e.preventDefault();
-          setLogoutValidation(true);
-          setTimeout(() => {
-            navigate("/login");
-          }, 1000);
+        {/* <Breadcrumb
+          style={{
+            margin: "16px 0",
+          }}
+        >
+          <Breadcrumb.Item>Sign-Up</Breadcrumb.Item>
+          <Breadcrumb.Item>Login</Breadcrumb.Item>
+          <Breadcrumb.Item>Users</Breadcrumb.Item>
+        </Breadcrumb> */}
+        <div className="site-layout-content"> content</div>
+      </Content>
+      {/* <Footer
+        style={{
+          textAlign: "center",
         }}
-        className="button-logout"
-        icon={<PoweroffOutlined />}
       >
-        Logout
-      </Button>
-
-      {LogoutValidation && (
-        <Alert message="Logout Successfull" type="success" />
-      )}
-
-      <div>
-        <h1 className="text-tittle">Student Details</h1>
-
-        <Table
-          columns={columns}
-          dataSource={props.appData}
-          pagination={true}
-          loading={loadingData}
-          key={props.appData.id}
-        ></Table>
-      </div>
-      {/* Model for view */}
-      <Modal
-        visible={visible}
-        title="View Details"
-        onCancel={handleCancel}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-            Return
-          </Button>,
-        ]}
-      >
-        {/* rendering view data through the Model */}
-        <Card>
-          <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
-          <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
-          <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
-          <Typography.Paragraph>
-            Address: {viewData.address}
-          </Typography.Paragraph>
-        </Card>
-      </Modal>
-    </div>
+        Ant Design ©2018 Created by Ant UED
+      </Footer> */}
+    </Layout>
   );
-}
+};
 
 export default Home;

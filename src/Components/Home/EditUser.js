@@ -14,11 +14,11 @@ const EditDetails = (props) => {
     //datasource will be new edited data
     setDataSource(values);
     //on successfull edition navigate to home page
-    navigate("/home");
+    navigate("/users");
   };
   const handleCancel = () => {
     //on cancel navigate to home page
-    navigate("/home");
+    navigate("/users");
   };
 
   return (

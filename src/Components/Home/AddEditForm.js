@@ -1,10 +1,10 @@
 //Form for add and edit user
 import React from "react";
-import { Button, Input, Form, Card } from "antd";
-
+import { Button, Input, Form } from "antd";
+import '../styles.css';
 function MyForm(props) {
   return (
-    <Card>
+    <div className="div-cls">
       <Form
         name="basic"
         labelCol={{
@@ -22,7 +22,7 @@ function MyForm(props) {
         }}
       >
         <Form.Item
-          label="Name"
+          // label="Name"
           name="name"
           rules={[
             {
@@ -35,7 +35,7 @@ function MyForm(props) {
         </Form.Item>
 
         <Form.Item
-          label="Email"
+          // label="Email"
           type="email"
           name="email"
           rules={[
@@ -52,7 +52,7 @@ function MyForm(props) {
           <Input Input allowClear className="input-css" placeholder="Email" />
         </Form.Item>
         <Form.Item
-          label="Address"
+          // label="Address"
           name="address"
           rules={[
             {
@@ -66,7 +66,7 @@ function MyForm(props) {
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 0,
             span: 16,
           }}
         >
@@ -78,7 +78,7 @@ function MyForm(props) {
           </Button>
         </Form.Item>
       </Form>
-    </Card>
+      </div>
   );
 }
 

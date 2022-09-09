@@ -9,11 +9,11 @@ const AddDetails = (props) => {
     //passing added value
     props.handleAdd(values);
     //on successfull addition navigate to home page
-    navigate("/home");
+    navigate("/users");
   };
   //on cancel navigate to home page
   const cancel = () => {
-    navigate("/home");
+    navigate("/users");
   };
 
   return (

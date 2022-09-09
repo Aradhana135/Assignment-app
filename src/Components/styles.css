@@ -8,12 +8,12 @@ Button.Button-css {
 }
 
 Button.add-button-css {
-    margin-bottom: 10;
+    margin-top: 30px;
     margin-top: 5;
 }
 
 Button.button-logout {
-    margin-top: 10;
+    margin-top: 50;
     margin-left: 1080px;
 }
 
@@ -46,7 +46,9 @@ h1.text-tittle {
 }
 
 .main-div-css {
-    margin: 60px;
+    /* margin: 60px; */
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -71,17 +73,56 @@ h1.text-tittle {
 }
 .signup-btn-css{
     margin: auto;
-
+    
 }
 .ant-form{
-    max-width: 2000px;
-}
-.ant-card{
     max-width: 1000px;
-    margin-left: 150px;
-    background-color: beige;
+    min-width: 800px;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 500px;
+    margin-top: 40px;
+}
+
+.ant-card{
+    max-width: 40%;
+    /* margin-left: 150px; */
+    margin-top: 50px;
+    background-color:antiquewhite;
     border-radius: 20px;
     box-shadow: 0px 0px 12px 1px;
 
-
 }
+.ant-card-body{
+    display: flex;
+    justify-content: center;
+}
+.div-cls{
+    margin-top: 50px;
+    background-color:antiquewhite;    
+  }
+  .form-cls{
+    display: flex;
+    justify-content: center;
+  }
+  .alert-msg-cls{
+    margin: 50px;
+  }
+  /* css of home-page
+   */
+   .site-layout-content {
+    min-height: 280px;
+    padding: 24px;
+    background: #fff;
+  }
+  #components-layout-demo-top .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .ant-row-rtl #components-layout-demo-top .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
