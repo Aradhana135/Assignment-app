@@ -1,19 +1,18 @@
-
-import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Protected = ({ children }) => {
-    // useEffect(() => {
-    //     navigate('/login')
-    //   });
-
   const navigate = useNavigate();
 
+  
+  useEffect(() => {
     let login = localStorage.getItem("login");
+    if (!login) navigate("/login");
+  });
 
-  return (
-    login ? children : navigate("/login" )
-  );
+  return <><Outlet/></>;
 };
 
 export default Protected;
+
+

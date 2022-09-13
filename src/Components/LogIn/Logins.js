@@ -85,15 +85,16 @@ const Logins = (props) => {
         //   span: 16,
         // }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" block>
             Login
           </Button>
-
+          </Form.Item>
+          <Form.Item>
           <Button
             type="text"
             href="/"
             className="signup-btn-css"
-            htmlType="submit"
+            htmlType="submit" block
           >
             Need an account ? SignUp
           </Button>

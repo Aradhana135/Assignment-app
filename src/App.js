@@ -9,8 +9,9 @@ import Users from "./Components/Home/Users";
 import axios from "axios";
 import AddDetails from "./Components/Home/AddUser";
 import EditDetails from "./Components/Home/EditUser";
+
+import Profile from "./Components/Home/Profile";
 import Protected from "./Protected";
-import Home from "./Components/Home/Home";
 
 const App = () => {
   //API response data
@@ -56,51 +57,52 @@ const App = () => {
 
   return (
     <>
-      <div className="main-div-css">
+    <div>
+     
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/signup"
-              element={<Forms localOldArr={localOldArr} />}
-            />
+            <Route path="/" element={<Forms localOldArr={localOldArr} />} />
 
             <Route
               path="/login"
               element={<Logins localOldArr={localOldArr} />}
             />
-            <Route
-              path="/users"
-              element={
-                <Protected>
+
+
+            <Route element={<Protected />}>
+            
+              <Route
+                path="/users"
+                element={
                   <Users
                     handleData={handleData}
                     appData={appData}
                     handleDelete={handleDelete}
                   />
-                </Protected>
-              }
-              /* // <Home */
-              // handleData={handleData}
-              // appData={appData}
-              // handleDelete={handleDelete}
-              // />
-              // }
-            />
-            <Route
-              path="/edit"
-              element={
-                <EditDetails data={data} handleEditData={handleEditData} />
-              }
-            />
-            <Route
-              path="/add"
-              element={<AddDetails data={data} handleAdd={handleAdd} />}
-            />
+                }
+              />
+               
+              <Route
+                path="/edit"
+                element={
+                  <EditDetails data={data} handleEditData={handleEditData} />
+                }
+              />
+              <Route
+                path="/add"
+                element={<AddDetails data={data} handleAdd={handleAdd} />}
+              />
+            </Route>
+            
+
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
+          
         </BrowserRouter>
-      </div>
+        </div>
+       
+      
     </>
   );
 };

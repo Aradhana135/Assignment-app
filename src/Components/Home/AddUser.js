@@ -18,7 +18,11 @@ const AddDetails = (props) => {
 
   return (
     <div>
-      <MyForm onFinish={onFinish} cancel={cancel} />
+      <MyForm 
+      onFinish={onFinish}
+       cancel={cancel} 
+       formFor="add" 
+       />
     </div>
   );
 };

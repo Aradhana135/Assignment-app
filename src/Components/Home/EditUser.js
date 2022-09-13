@@ -22,7 +22,14 @@ const EditDetails = (props) => {
   };
 
   return (
-    <MyForm onFinish={onFinish} cancel={handleCancel} dataSource={dataSource} />
+    <>
+      <MyForm
+        onFinish={onFinish}
+        cancel={handleCancel}
+        dataSource={dataSource}
+        formFor="edit"
+      />
+    </>
   );
 };
 

@@ -4,8 +4,10 @@ import { Button, Input, Form } from "antd";
 import '../styles.css';
 function MyForm(props) {
   return (
-    <div className="div-cls">
-      <Form
+    <div >
+    
+      
+      <Form className="add-edit-form-css"
         name="basic"
         labelCol={{
           span: 8,
@@ -16,13 +18,13 @@ function MyForm(props) {
         onFinish={props.onFinish}
         autoComplete="off"
         initialValues={{
-          name: props.dataSource ? props.dataSource.name : "",
-          email: props.dataSource ? props.dataSource.email : "",
-          address: props.dataSource ? props.dataSource.address : "",
+          name: props.formFor === "add" ? "" : props.dataSource.name,
+          email: props.formFor === "add" ? "" : props.dataSource.email,
+          address: props.formFor === "add" ? "" : props.dataSource.address,
         }}
       >
         <Form.Item
-          // label="Name"
+          label="Name"
           name="name"
           rules={[
             {
@@ -35,7 +37,7 @@ function MyForm(props) {
         </Form.Item>
 
         <Form.Item
-          // label="Email"
+          label="Email"
           type="email"
           name="email"
           rules={[
@@ -52,7 +54,7 @@ function MyForm(props) {
           <Input Input allowClear className="input-css" placeholder="Email" />
         </Form.Item>
         <Form.Item
-          // label="Address"
+          label="Address"
           name="address"
           rules={[
             {
@@ -66,8 +68,8 @@ function MyForm(props) {
 
         <Form.Item
           wrapperCol={{
-            offset: 0,
-            span: 16,
+            offset: 11,
+            span: 20,
           }}
         >
           <Button type="primary" htmlType="submit">
@@ -78,7 +80,8 @@ function MyForm(props) {
           </Button>
         </Form.Item>
       </Form>
-      </div>
+    </div>
+      
   );
 }
 

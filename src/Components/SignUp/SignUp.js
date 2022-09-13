@@ -6,12 +6,11 @@ import {
   Checkbox,
   Form,
   Input,
-  InputNumber,
   Select,
   Alert,
 } from "antd";
 import { useNavigate } from "react-router-dom";
-// import { formItemLayout, tailFormItemLayout } from "./FormLayout";
+
 const { Option } = Select;
 
 const Forms = (props) => {
@@ -69,16 +68,7 @@ const Forms = (props) => {
       </Select>
     </Form.Item>
   );
-  //prefix for selecting amount in USD / CNY
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select className="selectSuffix">
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
-  //for storing domain that is .com,.org,.net
+
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
   const onWebsiteChange = (value) => {
@@ -106,7 +96,6 @@ const Forms = (props) => {
             wrapperCol={{
               span: 8,
             }}
-            // {...formItemLayout}
             form={form}
             name="register"
             onFinish={onFinish}
@@ -231,24 +220,6 @@ const Forms = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="donation"
-              // label="Donation"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input donation amount!",
-                },
-              ]}
-            >
-              <InputNumber
-                type="number"
-                addonAfter={suffixSelector}
-                className="input-prefixSelector"
-                placeholder="Enter Amount"
-              />
-            </Form.Item>
-
-            <Form.Item
               name="website"
               // label="Website"
               rules={[
@@ -295,21 +266,21 @@ const Forms = (props) => {
                       : Promise.reject(new Error("Should accept agreement")),
                 },
               ]}
-              // {...tailFormItemLayout}
             >
               <Checkbox>I have read the agreement</Checkbox>
             </Form.Item>
-            <Form.Item
-            // {...tailFormItemLayout}
-            >
-              <Button type="primary" htmlType="submit">
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block>
                 Signup
               </Button>
+            </Form.Item>
+            <Form.Item>
               <Button
                 type="text"
                 href="/login"
                 htmlType="handleClick"
                 className="signup-btn"
+                block
               >
                 Already a user ? Login
               </Button>

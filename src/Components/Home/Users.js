@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-  PoweroffOutlined,
-  UserAddOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import "antd/dist/antd.min.css";
-import { Button, Table, Modal, Typography, Alert } from "antd";
+import { Button, Table, Modal, Typography } from "antd";
+import Navbar from "./Navbar";
 function Users(props) {
   const navigate = useNavigate();
   //for adding loading icon while loading the data into the table
@@ -18,18 +13,7 @@ function Users(props) {
   const [visible, setVisible] = useState(false);
   //storing data that to be visible
   const [viewData, setViewData] = useState({});
-  //flag for logout validation
-  const [LogoutValidation, setLogoutValidation] = useState(false);
-//handling logout cancel button
-const handelLogout=(e)=>{
-      e.preventDefault();
-      localStorage.removeItem("login")
-      setLogoutValidation(true);
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
-
-}
+  
   useEffect(() => {
     setTimeout(() => {
       setLoadingData(false);
@@ -112,51 +96,19 @@ const handelLogout=(e)=>{
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={(e) => {
-          e.preventDefault();
-
-          navigate("/add");
-        }}
-        className="add-button-css"
-        icon={<UserAddOutlined />}
-      >
-        Add
-      </Button>
-
-      <Button
-        type="primary"
-        // onClick={(e) => {
-        //   e.preventDefault();
-        //   setLogoutValidation(true);
-        //   setTimeout(() => {
-        //     navigate("/login");
-        //   }, 1000);
-        // }
-        onClick={handelLogout}
+       <Navbar/>
       
-        className="button-logout"
-        icon={<PoweroffOutlined />}
-      >
-        Logout
-      </Button>
 
-      {LogoutValidation && (
-        <Alert message="Logout Successfull" type="success" />
-      )}
+      <h1 className="text-tittle">Student Details</h1>
 
-      <div>
-        <h1 className="text-tittle">Student Details</h1>
+      <Table
+        columns={columns}
+        dataSource={props.appData}
+        pagination={true}
+        loading={loadingData}
+        key={props.appData.id}
+      ></Table>
 
-        <Table
-          columns={columns}
-          dataSource={props.appData}
-          pagination={true}
-          loading={loadingData}
-          key={props.appData.id}
-        ></Table>
-      </div>
       {/* Model for view */}
       <Modal
         visible={visible}
@@ -169,14 +121,14 @@ const handelLogout=(e)=>{
         ]}
       >
         {/* rendering view data through the Model */}
-       <div>
+        <div>
           <Typography.Paragraph> ID: {viewData.id} </Typography.Paragraph>
           <Typography.Paragraph> Name: {viewData.name}</Typography.Paragraph>
           <Typography.Paragraph> Email: {viewData.email}</Typography.Paragraph>
           <Typography.Paragraph>
             Address: {viewData.address}
           </Typography.Paragraph>
-          </div>
+        </div>
       </Modal>
     </div>
   );
